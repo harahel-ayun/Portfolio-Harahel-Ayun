@@ -78,7 +78,8 @@ Portfolio/
 │   └── types/             # Tipado e interfaces TypeScript
 └── next.config.ts         # Configuración de Next.js
 
-##Instalación y Ejecución Local
+---
+## Instalación y Ejecución Local
 Si deseas correr este proyecto en tu entorno local:
 # 1. Clonar el repositorio
 git clone https://github.com/harahel-ayun/Portfolio-Harahel-Ayun.git
@@ -92,7 +93,7 @@ npm run dev
 
 Abre en tu navegador http://localhost:3000 para ver la aplicación.
 
-##Contacto & Redes
+## Contacto & Redes
 * Email: harahelayun54@gmail.com
 * LinkedIn: linkedin.com/in/harahel-ayun-4aa1b330b
 * GitHub: github.com/harahel-ayun
