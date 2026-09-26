@@ -39,7 +39,7 @@ export const cvData = {
     linkedinUrl: 'https://www.linkedin.com/in/harahel-ayun-4aa1b330b/',
     githubUrl: 'https://github.com/harahel-ayun',
     availabilityBadge: 'Disponible para nuevos desafíos',
-    cvPdfPath: '/cv-harahel-ayun.pdf',
+    cvPdfPath: '/cv-harahel-ayun.pdf?v=2',
   },
 
   education: [
