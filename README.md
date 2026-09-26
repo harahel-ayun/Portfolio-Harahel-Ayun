@@ -77,7 +77,7 @@ Portfolio/
 │   │   └── projects.ts    # Listado de proyectos reales
 │   └── types/             # Tipado e interfaces TypeScript
 └── next.config.ts         # Configuración de Next.js
-
+```
 ---
 ## Instalación y Ejecución Local
 Si deseas correr este proyecto en tu entorno local:
@@ -92,7 +92,7 @@ npm install
 npm run dev
 
 Abre en tu navegador http://localhost:3000 para ver la aplicación.
-
+---
 ## Contacto & Redes
 * Email: harahelayun54@gmail.com
 * LinkedIn: linkedin.com/in/harahel-ayun-4aa1b330b
