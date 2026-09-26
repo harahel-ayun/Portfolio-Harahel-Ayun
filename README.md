@@ -94,7 +94,7 @@ npm run dev
 Abre en tu navegador http://localhost:3000 para ver la aplicación.
 ---
 ## Contacto & Redes
-* Email: harahelayun54@gmail.com
-* LinkedIn: linkedin.com/in/harahel-ayun-4aa1b330b
-* GitHub: github.com/harahel-ayun
-* Ubicación: Paraná, Entre Ríos, Argentina
+- **Email**: harahelayun54@gmail.com
+- **LinkedIn** [Harahel Ayun](https://www.linkedin.com/in/harahel-ayun-4aa1b330b)
+- **GitHub:** [github.com/harahel-ayun](https://github.com/harahel-ayun)
+- **Ubicación**: Paraná, Entre Rios, Argentina
