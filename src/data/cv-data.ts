@@ -28,7 +28,7 @@ export const cvData = {
     fullName: 'Harahel Jesús Ayun',
     shortName: 'Harahel Ayun',
     monogram: 'HA',
-    role: 'Desarrollador de Software & Estudiante de Ciberdefensa',
+    role: 'Técnico Universitario en Programación & Estudiante de Ciberdefensa',
     headline: 'Construyendo software robusto, seguro y escalable.',
     bio: 'Estudiante avanzado de Tecnicatura en Programación en la UTN y de la Licenciatura en Ciberdefensa en FADENA. Especializado en arquitecturas backend (C#/.NET, Java/Spring Boot) y desarrollo web full stack, combinando rigor técnico, aprendizaje autónomo y el uso estratégico de IA para maximizar la productividad.',
     location: 'Paraná, Entre Ríos, Argentina',

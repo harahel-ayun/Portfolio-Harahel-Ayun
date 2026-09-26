@@ -34,14 +34,14 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'es_AR',
     url: 'https://portfolio-harahel-ayun.vercel.app',
-    title: 'Harahel Jesús Ayun | Desarrollador de Software & Ciberdefensa',
+    title: 'Harahel Jesús Ayun | Técnico Universitario en Programación',
     description:
       'Portfolio profesional: proyectos en C#/.NET, Java/Spring Boot, PostgreSQL y aplicaciones web full stack con enfoque en seguridad y arquitectura limpia.',
     siteName: 'Harahel Jesús Ayun Portfolio',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Harahel Jesús Ayun | Desarrollador de Software & Ciberdefensa',
+    title: 'Harahel Jesús Ayun | Técnico Universitario en Programación',
     description:
       'Portfolio profesional de Harahel Jesús Ayun. C#/.NET, Java/Spring Boot, PostgreSQL, Ciberdefensa y desarrollo web.',
   },

@@ -28,7 +28,7 @@ export default function Footer() {
               <span className="font-bold text-base text-white">{personal.fullName}</span>
             </div>
             <p className="text-xs text-slate-400 max-w-sm leading-relaxed">
-              Desarrollador de software enfocado en backend robusto, seguridad y soluciones web modernas. Estudiante en UTN Paraná y FADENA.
+              Técnico Universitario en Programación enfocado en backend robusto, seguridad y soluciones web modernas. Estudiante en UTN Paraná y FADENA.
             </p>
             <div className="flex items-center gap-3 pt-2">
               <a
