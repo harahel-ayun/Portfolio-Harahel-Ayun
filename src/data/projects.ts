@@ -1,6 +1,7 @@
 import { Project } from '@/types/project';
+import { Language } from './translations';
 
-export const projects: Project[] = [
+export const projectsEs: Project[] = [
   {
     id: 'cartografo',
     title: 'Cartógrafo — Onboarding & Cartografía de Código Legacy',
@@ -40,3 +41,50 @@ export const projects: Project[] = [
     featured: true,
   },
 ];
+
+export const projectsEn: Project[] = [
+  {
+    id: 'cartografo',
+    title: 'Cartógrafo — Legacy Code Onboarding & Software Cartography',
+    description:
+      'Comprehensive software analysis and comprehension platform designed to accelerate developer onboarding into legacy codebases and complex monoliths. Features visual multi-tier architecture exploration, interactive dependency graphs, relational database ERDs, vulnerability detection (CVEs), technical debt insights, and guided onboarding tours with educational milestones. Static code analysis runs 100% in-memory within the browser using JSZip, guaranteeing complete code confidentiality.',
+    tags: [
+      'Next.js 16',
+      'React 19',
+      'TypeScript',
+      'Tailwind CSS v4',
+      'JSZip',
+      'Full Stack',
+      'Hackathon',
+    ],
+    category: 'Full Stack',
+    githubUrl: 'https://github.com/LuchoDB/Cartografo',
+    liveUrl: 'https://luchodb.github.io/Cartografo/',
+    featured: true,
+  },
+  {
+    id: 'gestion-terceros-facturas-spring',
+    title: 'Third Parties, Invoices & Payments Management System',
+    description:
+      'Enterprise full-stack application engineered for the Programming III course at UTN Paraná. Implements a layered architecture using Spring Boot and Spring Data JPA / Hibernate over PostgreSQL, coupled with a dynamic web UI built entirely in Java with Vaadin Flow. Features full third-party entity CRUD (tax ID, VAT status, addresses), commercial invoice association, payment tracking & reconciliation, and real-time grid filtering.',
+    tags: [
+      'Java 25',
+      'Spring Boot',
+      'Vaadin Flow',
+      'PostgreSQL',
+      'Spring Data JPA',
+      'Hibernate',
+      'Maven',
+      'UTN FRP',
+    ],
+    category: 'Backend',
+    githubUrl: 'https://github.com/harahel-ayun/Trabajo-Practico-Prog2026',
+    featured: true,
+  },
+];
+
+export function getProjects(language: Language): Project[] {
+  return language === 'en' ? projectsEn : projectsEs;
+}
+
+export const projects: Project[] = projectsEs;

@@ -1,10 +1,13 @@
+'use client';
+
 import React from 'react';
 import Image from 'next/image';
 import { Mail, ArrowUp } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from '@/components/icons/SocialIcons';
-import { cvData } from '@/data/cv-data';
+import { useLanguage } from '@/context/LanguageContext';
 
 export default function Footer() {
+  const { cvData, t } = useLanguage();
   const { personal } = cvData;
   const currentYear = new Date().getFullYear();
 
@@ -18,7 +21,7 @@ export default function Footer() {
               <div className="w-8 h-8 rounded-lg overflow-hidden border border-cyan-500/40 bg-slate-950 flex items-center justify-center shrink-0">
                 <Image
                   src="/icon.png"
-                  alt="Logo Harahel Ayun"
+                  alt={`Logo ${personal.fullName}`}
                   width={32}
                   height={32}
                   className="w-full h-full object-cover"
@@ -28,7 +31,7 @@ export default function Footer() {
               <span className="font-bold text-base text-white">{personal.fullName}</span>
             </div>
             <p className="text-xs text-slate-400 max-w-sm leading-relaxed">
-              Técnico Universitario en Programación enfocado en backend robusto, seguridad y soluciones web modernas. Estudiante en UTN Paraná y FADENA.
+              {t.footer.bio}
             </p>
             <div className="flex items-center gap-3 pt-2">
               <a
@@ -61,36 +64,36 @@ export default function Footer() {
 
           {/* Col 2: Navigation Links */}
           <div className="space-y-2.5">
-            <h4 className="text-xs font-mono uppercase tracking-wider text-white">Navegación</h4>
+            <h4 className="text-xs font-mono uppercase tracking-wider text-white">{t.footer.navTitle}</h4>
             <ul className="space-y-1.5 text-xs">
               <li>
                 <a href="#hero" className="hover:text-cyan-300 transition-colors">
-                  Inicio
+                  {t.nav.home}
                 </a>
               </li>
               <li>
                 <a href="#about" className="hover:text-cyan-300 transition-colors">
-                  Sobre Mí & Formación
+                  {t.nav.about}
                 </a>
               </li>
               <li>
                 <a href="#skills" className="hover:text-cyan-300 transition-colors">
-                  Habilidades & Tecnologías
+                  {t.nav.skills}
                 </a>
               </li>
               <li>
                 <a href="#projects" className="hover:text-cyan-300 transition-colors">
-                  Proyectos Realizados
+                  {t.nav.projects}
                 </a>
               </li>
               <li>
                 <a href="#experience" className="hover:text-cyan-300 transition-colors">
-                  Experiencia & Hitos
+                  {t.nav.experience}
                 </a>
               </li>
               <li>
                 <a href="#contact" className="hover:text-cyan-300 transition-colors">
-                  Contacto Directo
+                  {t.nav.contact}
                 </a>
               </li>
             </ul>
@@ -98,16 +101,16 @@ export default function Footer() {
 
           {/* Col 3: Tech Stack & Architecture */}
           <div className="space-y-2.5">
-            <h4 className="text-xs font-mono uppercase tracking-wider text-white">Tecnología Web</h4>
+            <h4 className="text-xs font-mono uppercase tracking-wider text-white">{t.footer.techTitle}</h4>
             <p className="text-xs text-slate-400 leading-relaxed">
-              Diseñado y construido con Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS v4 y Lucide Icons.
+              {t.footer.techDesc}
             </p>
             <div className="pt-2">
               <a
                 href="#hero"
                 className="inline-flex items-center gap-1.5 text-xs text-cyan-400 hover:text-cyan-300 transition-colors group font-medium"
               >
-                <span>Volver arriba</span>
+                <span>{t.footer.backToTop}</span>
                 <ArrowUp className="w-3.5 h-3.5 group-hover:-translate-y-1 transition-transform" />
               </a>
             </div>
@@ -117,11 +120,11 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-slate-800/60 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
           <p>
-            &copy; {currentYear} {personal.fullName}. Todos los derechos reservados.
+            &copy; {currentYear} {personal.fullName}. {t.footer.rights}
           </p>
           <div className="flex items-center gap-1">
-            <span>Desarrollado con dedicación</span>
-            <span>desde Paraná, Entre Ríos, Argentina</span>
+            <span>{t.footer.developedWith}</span>
+            <span>{t.footer.fromLocation}</span>
           </div>
         </div>
       </div>

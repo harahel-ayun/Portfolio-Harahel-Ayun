@@ -4,12 +4,14 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { Menu, X, Download } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from '@/components/icons/SocialIcons';
-import { cvData } from '@/data/cv-data';
+import LanguageToggle from '@/components/LanguageToggle';
+import { useLanguage } from '@/context/LanguageContext';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
+  const { t, cvData } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -34,12 +36,12 @@ export default function Navbar() {
   }, []);
 
   const navLinks = [
-    { name: 'Inicio', href: '#hero' },
-    { name: 'Sobre Mí', href: '#about' },
-    { name: 'Habilidades', href: '#skills' },
-    { name: 'Proyectos', href: '#projects' },
-    { name: 'Experiencia', href: '#experience' },
-    { name: 'Contacto', href: '#contact' },
+    { name: t.nav.home, href: '#hero' },
+    { name: t.nav.about, href: '#about' },
+    { name: t.nav.skills, href: '#skills' },
+    { name: t.nav.projects, href: '#projects' },
+    { name: t.nav.experience, href: '#experience' },
+    { name: t.nav.contact, href: '#contact' },
   ];
 
   return (
@@ -56,12 +58,12 @@ export default function Navbar() {
           <a
             href="#hero"
             className="flex items-center gap-2.5 group focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 rounded-lg p-1"
-            aria-label="Ir al inicio"
+            aria-label={t.nav.goToHome}
           >
             <div className="w-10 h-10 rounded-xl overflow-hidden border border-cyan-500/40 group-hover:border-cyan-400 transition-all duration-300 shadow-sm group-hover:shadow-[0_0_16px_rgba(34,211,238,0.35)] flex items-center justify-center bg-slate-950 shrink-0">
               <Image
                 src="/icon.png"
-                alt="Logo Harahel Ayun"
+                alt={`Logo ${cvData.personal.fullName}`}
                 width={40}
                 height={40}
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
@@ -74,7 +76,7 @@ export default function Navbar() {
                 {cvData.personal.shortName}
               </span>
               <span className="text-[10px] text-slate-400 font-mono tracking-wider uppercase">
-                Software & Ciberdefensa
+                {t.nav.tagline}
               </span>
             </div>
           </a>
@@ -85,7 +87,7 @@ export default function Navbar() {
               const isActive = activeSection === link.href.substring(1);
               return (
                 <a
-                  key={link.name}
+                  key={link.href}
                   href={link.href}
                   className={`px-3.5 py-1.5 rounded-full text-xs font-medium transition-all duration-200 ${
                     isActive
@@ -99,44 +101,51 @@ export default function Navbar() {
             })}
           </nav>
 
-          {/* Action buttons (CV & Socials) */}
-          <div className="hidden lg:flex items-center gap-3">
-            <a
-              href={cvData.personal.githubUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-2 text-slate-400 hover:text-white hover:bg-slate-800/80 rounded-lg border border-transparent hover:border-slate-700 transition-all"
-              aria-label="Perfil de GitHub"
-            >
-              <GithubIcon className="w-4 h-4" />
-            </a>
-            <a
-              href={cvData.personal.linkedinUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-2 text-slate-400 hover:text-[#0077b5] hover:bg-slate-800/80 rounded-lg border border-transparent hover:border-slate-700 transition-all"
-              aria-label="Perfil de LinkedIn"
-            >
-              <LinkedinIcon className="w-4 h-4" />
-            </a>
+          {/* Action buttons (Language Switcher, CV & Socials) */}
+          <div className="hidden md:flex items-center gap-2.5">
+            {/* Language Switcher */}
+            <LanguageToggle variant="navbar" />
 
-            <a
-              href={cvData.personal.cvPdfPath}
-              download="CV-Harahel-Ayun.pdf"
-              className="flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-gradient-to-r from-cyan-500/20 to-blue-600/20 hover:from-cyan-500/30 hover:to-blue-600/30 border border-cyan-500/40 text-cyan-300 text-xs font-semibold tracking-wide transition-all shadow-[0_0_12px_rgba(34,211,238,0.15)] hover:shadow-[0_0_18px_rgba(34,211,238,0.3)] hover:-translate-y-0.5 active:translate-y-0"
-            >
-              <Download className="w-3.5 h-3.5" />
-              <span>Descargar CV</span>
-            </a>
+            <div className="hidden lg:flex items-center gap-2 pl-1 border-l border-slate-800/80">
+              <a
+                href={cvData.personal.githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2 text-slate-400 hover:text-white hover:bg-slate-800/80 rounded-lg border border-transparent hover:border-slate-700 transition-all"
+                aria-label={t.nav.githubAria}
+              >
+                <GithubIcon className="w-4 h-4" />
+              </a>
+              <a
+                href={cvData.personal.linkedinUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2 text-slate-400 hover:text-[#0077b5] hover:bg-slate-800/80 rounded-lg border border-transparent hover:border-slate-700 transition-all"
+                aria-label={t.nav.linkedinAria}
+              >
+                <LinkedinIcon className="w-4 h-4" />
+              </a>
+
+              <a
+                href={cvData.personal.cvPdfPath}
+                download="CV-Harahel-Ayun.pdf"
+                className="flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-gradient-to-r from-cyan-500/20 to-blue-600/20 hover:from-cyan-500/30 hover:to-blue-600/30 border border-cyan-500/40 text-cyan-300 text-xs font-semibold tracking-wide transition-all shadow-[0_0_12px_rgba(34,211,238,0.15)] hover:shadow-[0_0_18px_rgba(34,211,238,0.3)] hover:-translate-y-0.5 active:translate-y-0 ml-1"
+              >
+                <Download className="w-3.5 h-3.5" />
+                <span>{t.nav.downloadCv}</span>
+              </a>
+            </div>
           </div>
 
-          {/* Mobile hamburger button */}
+          {/* Mobile top controls (Language Switcher, CV, Menu button) */}
           <div className="flex md:hidden items-center gap-2">
+            <LanguageToggle variant="compact" />
+
             <a
               href={cvData.personal.cvPdfPath}
               download="CV-Harahel-Ayun.pdf"
               className="p-2 text-cyan-400 bg-cyan-950/40 border border-cyan-500/30 rounded-lg hover:bg-cyan-900/40"
-              aria-label="Descargar CV"
+              aria-label={t.nav.downloadCv}
             >
               <Download className="w-4 h-4" />
             </a>
@@ -144,7 +153,7 @@ export default function Navbar() {
               onClick={() => setIsOpen(!isOpen)}
               className="p-2 text-slate-300 hover:text-white bg-slate-900/80 border border-slate-800 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-400"
               aria-expanded={isOpen}
-              aria-label="Alternar menú de navegación"
+              aria-label={t.nav.toggleMenu}
             >
               {isOpen ? <X className="w-5 h-5 text-cyan-400" /> : <Menu className="w-5 h-5" />}
             </button>
@@ -156,9 +165,12 @@ export default function Navbar() {
       {isOpen && (
         <div className="md:hidden border-b border-slate-800/90 bg-[#090d16]/95 backdrop-blur-xl px-4 pt-3 pb-6 shadow-2xl animate-in slide-in-from-top duration-200">
           <nav className="flex flex-col gap-1.5">
+            {/* Language toggle inside drawer */}
+            <LanguageToggle variant="drawer" className="mb-2" />
+
             {navLinks.map((link) => (
               <a
-                key={link.name}
+                key={link.href}
                 href={link.href}
                 onClick={() => setIsOpen(false)}
                 className={`px-4 py-2.5 rounded-lg text-sm font-medium transition-colors ${
@@ -179,7 +191,7 @@ export default function Navbar() {
                 className="flex items-center justify-center gap-2 w-full py-2.5 rounded-lg bg-cyan-500/20 border border-cyan-500/40 text-cyan-300 font-semibold text-sm hover:bg-cyan-500/30 transition-all"
               >
                 <Download className="w-4 h-4" />
-                Descargar CV Completo
+                {t.nav.downloadCvFull}
               </a>
               <div className="flex items-center justify-center gap-4 pt-2">
                 <a

@@ -1,58 +1,46 @@
+'use client';
+
 import React from 'react';
 import { Briefcase, Calendar, MapPin, CheckCircle2, Award, Building2 } from 'lucide-react';
-import { cvData } from '@/data/cv-data';
+import { useLanguage } from '@/context/LanguageContext';
 
 export default function Experience() {
-  const { experience } = cvData;
+  const { t } = useLanguage();
+  const m = t.experience.milestones;
 
   const milestones = [
     {
       type: 'work',
-      role: 'Atención al Cliente / Operaciones & Gestión',
-      entity: 'Complejo Deportivo Tercer Tiempo',
-      location: 'Paraná, Entre Ríos',
-      period: 'Verano 2025 – 2026',
-      badge: 'Experiencia Laboral',
-      description:
-        'Gestión operativa integral y atención en predio deportivo de alto flujo de usuarios, garantizando servicio continuo y resolución de contingencias.',
-      highlights: experience[0].tasks,
-      competencies: [
-        'Gestión y cobro de reservas',
-        'Resolución de consultas en tiempo real',
-        'Organización de turnos',
-        'Mantenimiento de infraestructura',
-      ],
+      role: m.workRole,
+      entity: m.workEntity,
+      location: m.workLocation,
+      period: m.workPeriod,
+      badge: m.workBadge,
+      description: m.workDescription,
+      highlights: m.workTasks,
+      competencies: m.workCompetencies,
     },
     {
       type: 'academic',
-      role: 'Estudiante Avanzado de Programación (Último Año)',
-      entity: 'Universidad Tecnológica Nacional (UTN)',
-      location: 'Facultad Regional Paraná',
-      period: 'En curso',
-      badge: 'Hito Académico',
-      description:
-        'Formación profunda en desarrollo de software: C#/.NET, POO en Java, modelado relacional en PostgreSQL, estructuras de datos y metodologías ágiles de desarrollo.',
-      highlights: [
-        'Desarrollo de proyectos backend y de escritorio orientados a buenas prácticas de código.',
-        'Diseño y normalización de bases de datos relacionales para escenarios de alta concurrencia.',
-        'Trabajo colaborativo y entrega metódica de software evaluado bajo estándares universitarios.',
-      ],
-      competencies: ['POO Avanzada', 'C# / .NET', 'Java', 'PostgreSQL', 'Algoritmia'],
+      role: m.utnRole,
+      entity: m.utnEntity,
+      location: m.utnLocation,
+      period: m.utnPeriod,
+      badge: m.utnBadge,
+      description: m.utnDescription,
+      highlights: m.utnHighlights,
+      competencies: m.utnCompetencies,
     },
     {
       type: 'academic',
-      role: 'Licenciatura en Ciberdefensa',
-      entity: 'Facultad de Defensa Nacional (FADENA)',
-      location: 'Argentina',
-      period: 'En curso',
-      badge: 'Especialización',
-      description:
-        'Abordaje multidisciplinario de la ciberseguridad: protección de infraestructuras críticas, análisis de vulnerabilidades, redes de comunicaciones y legislación de ciberdefensa.',
-      highlights: [
-        'Estudio de vectores de ataque, vectores de mitigación y seguridad perimetral.',
-        'Comprensión integral de protocolos TCP/IP, modelos OSI y hardening de sistemas Linux.',
-      ],
-      competencies: ['Seguridad en Redes', 'Linux Shell', 'Criptografía', 'Análisis de Riesgos'],
+      role: m.fadenaRole,
+      entity: m.fadenaEntity,
+      location: m.fadenaLocation,
+      period: m.fadenaPeriod,
+      badge: m.fadenaBadge,
+      description: m.fadenaDescription,
+      highlights: m.fadenaHighlights,
+      competencies: m.fadenaCompetencies,
     },
   ];
 
@@ -63,13 +51,13 @@ export default function Experience() {
         <div className="flex flex-col items-center text-center mb-16">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/40 border border-cyan-800/40 text-cyan-400 text-xs font-mono mb-3">
             <Briefcase className="w-3.5 h-3.5" />
-            <span>TRAYECTORIA & ANTECEDENTES</span>
+            <span>{t.experience.badge}</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white">
-            Experiencia & Hitos
+            {t.experience.title}
           </h2>
           <p className="mt-3 text-slate-400 max-w-2xl text-sm sm:text-base">
-            Combinación de experiencia operativa directa con usuarios y sólida constancia académica en programación y seguridad.
+            {t.experience.subtitle}
           </p>
         </div>
 

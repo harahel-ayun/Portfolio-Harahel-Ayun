@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import {
   GraduationCap,
@@ -11,9 +13,10 @@ import {
   BookOpen,
   Languages,
 } from 'lucide-react';
-import { cvData } from '@/data/cv-data';
+import { useLanguage } from '@/context/LanguageContext';
 
 export default function About() {
+  const { cvData, t } = useLanguage();
   const { education, softSkills, languages } = cvData;
 
   return (
@@ -23,13 +26,13 @@ export default function About() {
         <div className="flex flex-col items-center text-center mb-16">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/40 border border-cyan-800/40 text-cyan-400 text-xs font-mono mb-3">
             <GraduationCap className="w-3.5 h-3.5" />
-            <span>SOBRE MÍ & FORMACIÓN</span>
+            <span>{t.about.badge}</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white">
-            Fundamentos Sólidos, Aprendizaje Activo
+            {t.about.title}
           </h2>
           <p className="mt-3 text-slate-400 max-w-2xl text-sm sm:text-base">
-            Combinando el rigor algorítmico y la arquitectura de software de la UTN con la visión estratégica de seguridad y redes de la FADENA.
+            {t.about.subtitle}
           </p>
         </div>
 
@@ -38,28 +41,32 @@ export default function About() {
           <div className="lg:col-span-7 space-y-6">
             <div className="glass-panel p-6 sm:p-8 rounded-2xl border border-slate-800/90 relative overflow-hidden">
               <div className="absolute top-0 right-0 w-48 h-48 bg-cyan-500/5 rounded-full blur-2xl pointer-events-none" />
-              
+
               <div className="flex items-center gap-3 mb-4">
                 <div className="p-2.5 rounded-xl bg-blue-500/10 border border-blue-500/20 text-cyan-400">
                   <BrainCircuit className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold text-white">Perfil & Enfoque de Ingeniería</h3>
-                  <p className="text-xs text-slate-400">Metodología de desarrollo, resiliencia y mejora continua</p>
+                  <h3 className="text-lg font-bold text-white">{t.about.profileTitle}</h3>
+                  <p className="text-xs text-slate-400">{t.about.profileSubtitle}</p>
                 </div>
               </div>
 
               <div className="space-y-4 text-slate-300 text-sm sm:text-base leading-relaxed">
                 <p>
-                  Soy un apasionado por la construcción de software con base sólida. Mi trayectoria combina una doble vocación formativa: por un lado, la <strong className="text-white">Tecnicatura Universitaria en Programación</strong> en la Universidad Tecnológica Nacional (UTN Paraná), donde profundizo en paradigmas orientados a objetos, estructuras de datos, diseño de bases de datos relacionales y arquitectura de software.
+                  {t.about.p1Part1}{' '}
+                  <strong className="text-white">{t.about.p1Highlight}</strong>{' '}
+                  {t.about.p1Part2}
                 </p>
                 <p>
-                  Por otro lado, curso la <strong className="text-white">Licenciatura en Ciberdefensa</strong> en la Facultad de Defensa Nacional (FADENA), lo que me proporciona una mentalidad orientada a la seguridad por diseño, el análisis riguroso de protocolos, la prevención de vulnerabilidades y la protección de infraestructuras.
+                  {t.about.p2Part1}{' '}
+                  <strong className="text-white">{t.about.p2Highlight}</strong>{' '}
+                  {t.about.p2Part2}
                 </p>
                 <p className="p-3.5 rounded-xl bg-slate-900/80 border border-slate-800 text-cyan-300 text-xs sm:text-sm font-medium flex items-start gap-2.5">
                   <Sparkles className="w-5 h-5 text-cyan-400 shrink-0 mt-0.5" />
                   <span>
-                    <strong>Multiplicador de Productividad con IA:</strong> Integro activamente herramientas de Inteligencia Artificial para acelerar ciclos de investigación, optimizar flujos de refactorización y garantizar testing exhaustivo, manteniendo siempre el control crítico sobre el código.
+                    <strong>{t.about.aiBadgeTitle}</strong> {t.about.aiBadgeDesc}
                   </span>
                 </p>
               </div>
@@ -69,7 +76,7 @@ export default function About() {
             <div className="glass-panel p-6 rounded-2xl border border-slate-800/90">
               <div className="flex items-center gap-2 mb-4 text-xs font-mono uppercase tracking-wider text-slate-400">
                 <Compass className="w-4 h-4 text-cyan-400" />
-                <span>Habilidades Blandas & Dinámica de Trabajo</span>
+                <span>{t.about.softSkillsTitle}</span>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {softSkills.map((skill) => (
@@ -96,8 +103,8 @@ export default function About() {
                   <Languages className="w-5 h-5" />
                 </div>
                 <div>
-                  <h4 className="text-sm font-bold text-white">Competencia Idiomática</h4>
-                  <p className="text-xs text-slate-400">Comunicación efectiva y lectura técnica</p>
+                  <h4 className="text-sm font-bold text-white">{t.about.languageTitle}</h4>
+                  <p className="text-xs text-slate-400">{t.about.languageSubtitle}</p>
                 </div>
               </div>
               <div className="flex items-center gap-4 w-full sm:w-auto justify-end">
@@ -116,7 +123,7 @@ export default function About() {
             <div className="flex items-center justify-between px-1">
               <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-slate-400">
                 <BookOpen className="w-4 h-4 text-cyan-400" />
-                <span>Trayectoria Académica</span>
+                <span>{t.about.academicTimelineTitle}</span>
               </div>
               <span className="text-[11px] text-cyan-400 font-mono">UTN & FADENA</span>
             </div>
@@ -149,7 +156,7 @@ export default function About() {
 
                     <span
                       className={`text-[10px] font-mono px-2.5 py-0.5 rounded-full shrink-0 font-medium ${
-                        item.status === 'En curso'
+                        item.status === 'En curso' || item.status === 'In progress'
                           ? 'bg-cyan-500/15 text-cyan-300 border border-cyan-500/30'
                           : 'bg-emerald-500/15 text-emerald-300 border border-emerald-500/30'
                       }`}
@@ -171,11 +178,12 @@ export default function About() {
             <div className="p-4 rounded-xl bg-slate-950/60 border border-slate-800/80 text-xs text-slate-400 space-y-1.5">
               <div className="flex items-center gap-2 text-slate-300 font-medium">
                 <Cpu className="w-4 h-4 text-cyan-400" />
-                <span>Información Adicional & Logística</span>
+                <span>{t.about.additionalInfoTitle}</span>
               </div>
               <ul className="list-disc list-inside text-[11px] text-slate-400 space-y-1 pt-1">
-                <li>Registro de conducir vigente clase B1 y movilidad propia (vehículo y bicicleta).</li>
-                <li>Ubicación: Paraná, Entre Ríos, Argentina (con plena disponibilidad horaria para trabajo presencial, híbrido o remoto).</li>
+                {t.about.additionalInfoItems.map((info, idx) => (
+                  <li key={idx}>{info}</li>
+                ))}
               </ul>
             </div>
           </div>

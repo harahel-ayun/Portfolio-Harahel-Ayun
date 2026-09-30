@@ -13,9 +13,10 @@ import {
   ExternalLink,
 } from 'lucide-react';
 import { LinkedinIcon } from '@/components/icons/SocialIcons';
-import { cvData } from '@/data/cv-data';
+import { useLanguage } from '@/context/LanguageContext';
 
 export default function Contact() {
+  const { cvData, t } = useLanguage();
   const { personal } = cvData;
   const [copied, setCopied] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
@@ -35,11 +36,11 @@ export default function Contact() {
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setFormSubmitted(true);
-    // Prepare mailto link as fallback to actually send the email easily
+    const defaultSubject = t.contact.subjectPlaceholder.replace('Ej. ', '').replace('e.g. ', '');
     const mailto = `mailto:${personal.email}?subject=${encodeURIComponent(
-      formData.subject || 'Contacto desde Portfolio Web'
+      formData.subject || defaultSubject
     )}&body=${encodeURIComponent(
-      `Nombre: ${formData.name}\nEmail: ${formData.email}\n\nMensaje:\n${formData.message}`
+      `Nombre / Name: ${formData.name}\nEmail: ${formData.email}\n\nMensaje / Message:\n${formData.message}`
     )}`;
     window.location.href = mailto;
   };
@@ -51,13 +52,13 @@ export default function Contact() {
         <div className="flex flex-col items-center text-center mb-16">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/40 border border-cyan-800/40 text-cyan-400 text-xs font-mono mb-3">
             <MessageSquare className="w-3.5 h-3.5" />
-            <span>COMUNICACIÓN DIRECTA</span>
+            <span>{t.contact.badge}</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white">
-            Iniciemos una Conversación
+            {t.contact.title}
           </h2>
           <p className="mt-3 text-slate-400 max-w-xl text-sm sm:text-base">
-            Abierto a propuestas laborales y proyectos desafiantes donde aportaré valor técnico y compromiso.
+            {t.contact.subtitle}
           </p>
         </div>
 
@@ -73,24 +74,24 @@ export default function Contact() {
                 <button
                   onClick={handleCopyEmail}
                   className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-700/80 hover:border-cyan-500/50 text-xs font-mono text-slate-300 hover:text-cyan-300 transition-all"
-                  aria-label="Copiar dirección de email"
+                  aria-label={t.contact.emailCopy}
                 >
                   {copied ? (
                     <>
                       <Check className="w-3.5 h-3.5 text-emerald-400" />
-                      <span className="text-emerald-400 font-semibold">¡Copiado!</span>
+                      <span className="text-emerald-400 font-semibold">{t.contact.emailCopied}</span>
                     </>
                   ) : (
                     <>
                       <Copy className="w-3.5 h-3.5 text-slate-400" />
-                      <span>Copiar</span>
+                      <span>{t.contact.emailCopy}</span>
                     </>
                   )}
                 </button>
               </div>
 
               <h3 className="text-xs font-mono uppercase tracking-wider text-slate-400 mb-1">
-                Correo Electrónico
+                {t.contact.emailCardTitle}
               </h3>
               <a
                 href={`mailto:${personal.email}`}
@@ -99,7 +100,7 @@ export default function Contact() {
                 {personal.email}
               </a>
               <p className="text-[11px] text-slate-400 mt-2">
-                Respuesta garantizada en menos de 24 horas hábiles.
+                {t.contact.emailSubtext}
               </p>
             </div>
 
@@ -116,12 +117,12 @@ export default function Contact() {
                 </div>
                 <div>
                   <h3 className="text-xs font-mono uppercase tracking-wider text-slate-400">
-                    LinkedIn Profesional
+                    {t.contact.linkedinTitle}
                   </h3>
                   <p className="text-base font-bold text-white group-hover:text-blue-300 transition-colors">
-                    Harahel Ayun
+                    {personal.shortName}
                   </p>
-                  <p className="text-[11px] text-slate-400 mt-0.5">Conectemos en la red profesional</p>
+                  <p className="text-[11px] text-slate-400 mt-0.5">{t.contact.linkedinSubtext}</p>
                 </div>
               </div>
               <ExternalLink className="w-4 h-4 text-slate-500 group-hover:text-blue-400 group-hover:translate-x-0.5 transition-all" />
@@ -140,12 +141,12 @@ export default function Contact() {
                 </div>
                 <div>
                   <h3 className="text-xs font-mono uppercase tracking-wider text-slate-400">
-                    Teléfono & WhatsApp
+                    {t.contact.phoneTitle}
                   </h3>
                   <p className="text-base font-bold text-white group-hover:text-emerald-300 transition-colors">
                     {personal.phoneFormatted}
                   </p>
-                  <p className="text-[11px] text-slate-400 mt-0.5">Mensajes o llamadas directas</p>
+                  <p className="text-[11px] text-slate-400 mt-0.5">{t.contact.phoneSubtext}</p>
                 </div>
               </div>
               <ExternalLink className="w-4 h-4 text-slate-500 group-hover:text-emerald-400 group-hover:translate-x-0.5 transition-all" />
@@ -158,18 +159,18 @@ export default function Contact() {
               </div>
               <div>
                 <h3 className="text-xs font-mono uppercase tracking-wider text-slate-400">
-                  Residencia Actual
+                  {t.contact.locationTitle}
                 </h3>
-                <p className="text-base font-bold text-white">Paraná, Entre Ríos, Argentina</p>
-                <p className="text-[11px] text-slate-400 mt-0.5">Disponible presencial, híbrido y remoto</p>
+                <p className="text-base font-bold text-white">{t.contact.locationValue}</p>
+                <p className="text-[11px] text-slate-400 mt-0.5">{t.contact.locationSubtext}</p>
               </div>
             </div>
 
             {/* CV Download CTA */}
             <div className="p-5 rounded-2xl bg-gradient-to-r from-cyan-950/40 to-blue-950/40 border border-cyan-500/30 flex items-center justify-between gap-4">
               <div>
-                <p className="text-xs font-bold text-white">¿Necesitas una copia en PDF?</p>
-                <p className="text-[11px] text-slate-400 mt-0.5">Descarga el currículum vitae completo</p>
+                <p className="text-xs font-bold text-white">{t.contact.cvCardQuestion}</p>
+                <p className="text-[11px] text-slate-400 mt-0.5">{t.contact.cvCardSubtext}</p>
               </div>
               <a
                 href={personal.cvPdfPath}
@@ -177,7 +178,7 @@ export default function Contact() {
                 className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-cyan-500/20 hover:bg-cyan-500/30 border border-cyan-500/40 text-cyan-300 text-xs font-semibold whitespace-nowrap transition-all"
               >
                 <Download className="w-3.5 h-3.5" />
-                Descargar CV
+                {t.contact.cvCardBtn}
               </a>
             </div>
           </div>
@@ -186,9 +187,9 @@ export default function Contact() {
           <div className="lg:col-span-7">
             <div className="glass-panel p-6 sm:p-8 rounded-2xl border border-slate-800/90">
               <div className="mb-6">
-                <h3 className="text-xl font-bold text-white">Enviar Mensaje Directo</h3>
+                <h3 className="text-xl font-bold text-white">{t.contact.formTitle}</h3>
                 <p className="text-xs text-slate-400 mt-1">
-                  Completa los campos a continuación para iniciar contacto por correo electrónico.
+                  {t.contact.formSubtitle}
                 </p>
               </div>
 
@@ -196,7 +197,7 @@ export default function Contact() {
                 <div className="mb-6 p-4 rounded-xl bg-emerald-950/40 border border-emerald-500/30 text-emerald-300 text-xs flex items-center gap-2.5">
                   <Check className="w-4 h-4 text-emerald-400 shrink-0" />
                   <span>
-                    ¡Gracias por contactar! Se abrirá tu cliente de correo para enviar el mensaje con los datos completados.
+                    {t.contact.formSuccess}
                   </span>
                 </div>
               )}
@@ -208,7 +209,7 @@ export default function Contact() {
                       htmlFor="name"
                       className="block text-xs font-mono text-slate-300 mb-1.5 uppercase"
                     >
-                      Nombre y Apellido *
+                      {t.contact.nameLabel}
                     </label>
                     <input
                       type="text"
@@ -216,7 +217,7 @@ export default function Contact() {
                       required
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      placeholder="Ej. Roberto Gómez"
+                      placeholder={t.contact.namePlaceholder}
                       className="w-full px-4 py-2.5 rounded-xl bg-slate-900/90 border border-slate-800 focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 text-white placeholder-slate-500 text-sm outline-none transition-colors"
                     />
                   </div>
@@ -226,7 +227,7 @@ export default function Contact() {
                       htmlFor="email"
                       className="block text-xs font-mono text-slate-300 mb-1.5 uppercase"
                     >
-                      Tu Correo Electrónico *
+                      {t.contact.emailLabel}
                     </label>
                     <input
                       type="email"
@@ -234,7 +235,7 @@ export default function Contact() {
                       required
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      placeholder="tu-email@empresa.com"
+                      placeholder={t.contact.emailPlaceholder}
                       className="w-full px-4 py-2.5 rounded-xl bg-slate-900/90 border border-slate-800 focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 text-white placeholder-slate-500 text-sm outline-none transition-colors"
                     />
                   </div>
@@ -245,7 +246,7 @@ export default function Contact() {
                     htmlFor="subject"
                     className="block text-xs font-mono text-slate-300 mb-1.5 uppercase"
                   >
-                    Asunto o Motivo *
+                    {t.contact.subjectLabel}
                   </label>
                   <input
                     type="text"
@@ -253,7 +254,7 @@ export default function Contact() {
                     required
                     value={formData.subject}
                     onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                    placeholder="Ej. Oportunidad laboral / Propuesta de pasantía"
+                    placeholder={t.contact.subjectPlaceholder}
                     className="w-full px-4 py-2.5 rounded-xl bg-slate-900/90 border border-slate-800 focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 text-white placeholder-slate-500 text-sm outline-none transition-colors"
                   />
                 </div>
@@ -263,7 +264,7 @@ export default function Contact() {
                     htmlFor="message"
                     className="block text-xs font-mono text-slate-300 mb-1.5 uppercase"
                   >
-                    Mensaje *
+                    {t.contact.messageLabel}
                   </label>
                   <textarea
                     id="message"
@@ -271,7 +272,7 @@ export default function Contact() {
                     rows={5}
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    placeholder="Escribe tu mensaje, propuesta o consulta aquí..."
+                    placeholder={t.contact.messagePlaceholder}
                     className="w-full px-4 py-2.5 rounded-xl bg-slate-900/90 border border-slate-800 focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 text-white placeholder-slate-500 text-sm outline-none transition-colors resize-none"
                   />
                 </div>
@@ -281,7 +282,7 @@ export default function Contact() {
                   className="w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-bold text-sm flex items-center justify-center gap-2 transition-all shadow-[0_0_20px_rgba(34,211,238,0.25)] hover:shadow-[0_0_28px_rgba(34,211,238,0.4)] hover:-translate-y-0.5 active:translate-y-0"
                 >
                   <Send className="w-4 h-4" />
-                  <span>Enviar Mensaje</span>
+                  <span>{t.contact.submitBtn}</span>
                 </button>
               </form>
             </div>

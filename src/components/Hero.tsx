@@ -1,8 +1,11 @@
+'use client';
+
 import React from 'react';
 import { ArrowDown, Mail, Download, ShieldCheck, Terminal, Sparkles, MapPin } from 'lucide-react';
-import { cvData } from '@/data/cv-data';
+import { useLanguage } from '@/context/LanguageContext';
 
 export default function Hero() {
+  const { cvData, t } = useLanguage();
   const { personal } = cvData;
 
   return (
@@ -26,29 +29,32 @@ export default function Hero() {
           <span className="text-slate-600">|</span>
           <span className="inline-flex items-center gap-1 text-slate-400">
             <MapPin className="w-3 h-3 text-cyan-400" />
-            Paraná, Entre Ríos
+            {t.hero.location}
           </span>
         </div>
 
         {/* Greeting & Name */}
         <div className="flex items-center gap-2 text-xs sm:text-sm font-mono uppercase tracking-widest text-cyan-400 mb-2">
           <Terminal className="w-4 h-4" />
-          <span>Hola, soy</span>
+          <span>{t.hero.greeting}</span>
         </div>
 
         <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white mb-6">
           <span className="block">{personal.fullName}</span>
           <span className="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-sky-300 to-blue-500">
-            Técnico Universitario en Programación
+            {t.hero.titleRole}
           </span>
         </h1>
 
         {/* Professional summary */}
         <p className="text-base sm:text-lg lg:text-xl text-slate-300 max-w-2xl mx-auto mb-9 font-normal leading-relaxed text-balance">
-          Estudiante de <strong className="text-white font-semibold">Tecnicatura en Programación</strong> (UTN) y{' '}
-          <strong className="text-white font-semibold">Licenciatura en Ciberdefensa</strong> (FADENA). Enfoque en{' '}
-          <span className="text-cyan-300 font-medium">arquitecturas backend robustas</span> (C#/.NET, Java/Spring Boot),
-          desarrollo web full stack y resolución de problemas complejos aplicando IA como multiplicador técnico.
+          {t.hero.summary.part1}{' '}
+          <strong className="text-white font-semibold">{t.hero.summary.highlight1}</strong>{' '}
+          {t.hero.summary.part2}{' '}
+          <strong className="text-white font-semibold">{t.hero.summary.highlight2}</strong>{' '}
+          {t.hero.summary.part3}{' '}
+          <span className="text-cyan-300 font-medium">{t.hero.summary.highlight3}</span>{' '}
+          {t.hero.summary.part4}
         </p>
 
         {/* CTAs */}
@@ -57,7 +63,7 @@ export default function Hero() {
             href="#projects"
             className="flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-semibold text-sm transition-all shadow-[0_0_20px_rgba(34,211,238,0.35)] hover:shadow-[0_0_28px_rgba(34,211,238,0.5)] hover:-translate-y-0.5 active:translate-y-0 w-full sm:w-auto"
           >
-            <span>Ver Proyectos</span>
+            <span>{t.hero.ctaProjects}</span>
             <ArrowDown className="w-4 h-4 animate-bounce" />
           </a>
 
@@ -66,7 +72,7 @@ export default function Hero() {
             className="flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-slate-900/90 hover:bg-slate-800 text-slate-200 hover:text-white font-medium text-sm border border-slate-700/80 hover:border-cyan-500/40 transition-all hover:-translate-y-0.5 active:translate-y-0 w-full sm:w-auto backdrop-blur-md"
           >
             <Mail className="w-4 h-4 text-cyan-400" />
-            <span>Contactar</span>
+            <span>{t.hero.ctaContact}</span>
           </a>
 
           <a
@@ -75,7 +81,7 @@ export default function Hero() {
             className="flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-slate-900/60 hover:bg-slate-800/80 text-cyan-300 font-medium text-sm border border-cyan-500/30 hover:border-cyan-400 transition-all hover:-translate-y-0.5 active:translate-y-0 w-full sm:w-auto"
           >
             <Download className="w-4 h-4" />
-            <span>Descargar CV</span>
+            <span>{t.hero.ctaCv}</span>
           </a>
         </div>
 
@@ -84,37 +90,37 @@ export default function Hero() {
           <div className="glass-panel p-3.5 rounded-xl text-left border border-slate-800/90 hover:border-cyan-500/30 transition-colors">
             <div className="flex items-center gap-2 text-cyan-400 mb-1">
               <Terminal className="w-4 h-4" />
-              <span className="text-xs font-mono font-semibold">Backend</span>
+              <span className="text-xs font-mono font-semibold">{t.hero.metrics.backendTitle}</span>
             </div>
-            <p className="text-sm font-medium text-white">C# .NET & Java</p>
-            <p className="text-[11px] text-slate-400 mt-0.5">Spring Boot, Maven, APIs</p>
+            <p className="text-sm font-medium text-white">{t.hero.metrics.backendSubtitle}</p>
+            <p className="text-[11px] text-slate-400 mt-0.5">{t.hero.metrics.backendDesc}</p>
           </div>
 
           <div className="glass-panel p-3.5 rounded-xl text-left border border-slate-800/90 hover:border-cyan-500/30 transition-colors">
             <div className="flex items-center gap-2 text-sky-400 mb-1">
               <ShieldCheck className="w-4 h-4" />
-              <span className="text-xs font-mono font-semibold">Ciberdefensa</span>
+              <span className="text-xs font-mono font-semibold">{t.hero.metrics.cyberTitle}</span>
             </div>
-            <p className="text-sm font-medium text-white">LICENCIATURA en curso</p>
-            <p className="text-[11px] text-slate-400 mt-0.5">Seguridad & Redes</p>
+            <p className="text-sm font-medium text-white">{t.hero.metrics.cyberSubtitle}</p>
+            <p className="text-[11px] text-slate-400 mt-0.5">{t.hero.metrics.cyberDesc}</p>
           </div>
 
           <div className="glass-panel p-3.5 rounded-xl text-left border border-slate-800/90 hover:border-cyan-500/30 transition-colors">
             <div className="flex items-center gap-2 text-blue-400 mb-1">
               <Terminal className="w-4 h-4" />
-              <span className="text-xs font-mono font-semibold">Programacion</span>
+              <span className="text-xs font-mono font-semibold">{t.hero.metrics.progTitle}</span>
             </div>
-            <p className="text-sm font-medium text-white">Finalizando TECNICATURA</p>
-            <p className="text-[11px] text-slate-400 mt-0.5">UTN Paraná - Prog. Último Año</p>
+            <p className="text-sm font-medium text-white">{t.hero.metrics.progSubtitle}</p>
+            <p className="text-[11px] text-slate-400 mt-0.5">{t.hero.metrics.progDesc}</p>
           </div>
 
           <div className="glass-panel p-3.5 rounded-xl text-left border border-slate-800/90 hover:border-cyan-500/30 transition-colors">
             <div className="flex items-center gap-2 text-cyan-300 mb-1">
               <Sparkles className="w-4 h-4" />
-              <span className="text-xs font-mono font-semibold">Productividad</span>
+              <span className="text-xs font-mono font-semibold">{t.hero.metrics.aiTitle}</span>
             </div>
-            <p className="text-sm font-medium text-white">Uso de IA</p>
-            <p className="text-[11px] text-slate-400 mt-0.5">Como Herramienta</p>
+            <p className="text-sm font-medium text-white">{t.hero.metrics.aiSubtitle}</p>
+            <p className="text-[11px] text-slate-400 mt-0.5">{t.hero.metrics.aiDesc}</p>
           </div>
         </div>
       </div>
